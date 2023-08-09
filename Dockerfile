@@ -21,4 +21,12 @@ RUN install-php-extensions sockets
 RUN install-php-extensions zip
 RUN install-php-extensions xsl
 
+RUN curl -L "https://download.newrelic.com/php_agent/release/newrelic-php5-10.11.0.3-linux.tar.gz" --output /tmp/newrelic.tar.gz && \
+    cd /tmp && \
+    tar -xf newrelic.tar.gz && \
+    cd newrelic-* && \
+    NR_INSTALL_SILENT=true ./newrelic-install install && \
+    cp --remove-destination "$(readlink "$(php -r "echo ini_get ('extension_dir');")/newrelic.so")" "$(php -r "echo ini_get ('extension_dir');")/newrelic.so" && \
+    rm -rf /tmp/newrelic*
+
 WORKDIR /app
