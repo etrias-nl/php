@@ -1,4 +1,4 @@
-FROM mlocati/php-extension-installer:2.1.44 as php_ext_installer
+FROM mlocati/php-extension-installer:2.1.45 as php_ext_installer
 
 FROM php:8.1.22-fpm
 
