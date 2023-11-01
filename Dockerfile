@@ -1,6 +1,6 @@
 FROM mlocati/php-extension-installer:2.1.59 as php_ext_installer
 
-FROM php:8.1.25-fpm
+FROM php:8.2.12-fpm
 
 COPY --from=php_ext_installer /usr/bin/install-php-extensions /usr/bin/
 RUN install-php-extensions apcu
