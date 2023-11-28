@@ -1,6 +1,6 @@
 FROM mlocati/php-extension-installer:2.1.66 as php_ext_installer
 
-FROM php:8.1.25-fpm
+FROM php:8.1.26-fpm
 
 RUN ln -sr /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini
 
