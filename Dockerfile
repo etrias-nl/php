@@ -33,4 +33,7 @@ RUN curl -L "https://download.newrelic.com/php_agent/archive/10.12.0.1/newrelic-
     cp --remove-destination "$(readlink "$(php -r "echo ini_get ('extension_dir');")/newrelic.so")" "$(php -r "echo ini_get ('extension_dir');")/newrelic.so" && \
     rm -rf /tmp/newrelic*
 
+RUN wget -qO /tmp/nats.deb https://github.com/nats-io/natscli/releases/latest/download/nats-0.1.1-amd64.deb
+RUN dpkg -i /tmp/nats.deb
+
 WORKDIR /app
