@@ -33,7 +33,7 @@ RUN cd /tmp && \
     cp --remove-destination "$(readlink "$(php -r "echo ini_get ('extension_dir');")/newrelic.so")" "$(php -r "echo ini_get ('extension_dir');")/newrelic.so" && \
     rm -rf /tmp/newrelic*
 
-RUN curl -L 'https://github.com/nats-io/natscli/releases/latest/download/nats-0.1.1-amd64.deb' --output /tmp/nats.deb
+RUN curl -L 'https://github.com/nats-io/natscli/releases/latest/download/nats-0.1.3-amd64.deb' --output /tmp/nats.deb
 RUN dpkg -i /tmp/nats.deb
 
 WORKDIR /app
