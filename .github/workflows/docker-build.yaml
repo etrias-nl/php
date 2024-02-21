@@ -35,6 +35,9 @@ jobs:
                 run: |
                     docker run --rm "${{ steps.build.outputs.imageid }}" php -v
                     docker run --rm "${{ steps.build.outputs.imageid }}" php -m
+                    docker run --rm "${{ steps.build.outputs.imageid }}" envsub --version
+                    docker run --rm "${{ steps.build.outputs.imageid }}" composer --version
+                    docker run --rm "${{ steps.build.outputs.imageid }}" pt-online-schema-change --version
                     docker run --rm "${{ steps.build.outputs.imageid }}" nats --version
             -
                 uses: docker/login-action@v3.0.0
