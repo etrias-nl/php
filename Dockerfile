@@ -25,15 +25,10 @@ RUN install-php-extensions xsl
 RUN install-php-extensions zip
 
 # https://docs.newrelic.com/docs/release-notes/agent-release-notes/php-release-notes/
-RUN curl -L 'https://download.newrelic.com/php_agent/archive/10.16.0.5/newrelic-php5-10.16.0.5-linux.tar.gz' --output /tmp/newrelic.tar.gz
-RUN cd /tmp && \
-    tar -xf newrelic.tar.gz && \
-    cd newrelic-* && \
-    NR_INSTALL_SILENT=true ./newrelic-install install && \
-    cp --remove-destination "$(readlink "$(php -r "echo ini_get ('extension_dir');")/newrelic.so")" "$(php -r "echo ini_get ('extension_dir');")/newrelic.so" && \
-    rm -rf /tmp/newrelic*
+ADD 'https://download.newrelic.com/php_agent/archive/10.16.0.5/newrelic-php5-10.16.0.5-linux.tar.gz' /tmp/newrelic.tar.gz
+RUN cd /tmp && tar -xf newrelic.tar.gz && cd newrelic-* && NR_INSTALL_SILENT=true ./newrelic-install install && cp --remove-destination "$(readlink "$(php -r "echo ini_get ('extension_dir');")/newrelic.so")" "$(php -r "echo ini_get ('extension_dir');")/newrelic.so" && rm -rf /tmp/newrelic*
 
-RUN curl -L 'https://github.com/nats-io/natscli/releases/latest/download/nats-0.1.3-amd64.deb' --output /tmp/nats.deb
-RUN dpkg -i /tmp/nats.deb
+ADD 'https://github.com/nats-io/natscli/releases/latest/download/nats-0.1.3-amd64.deb' /tmp/nats.deb
+RUN dpkg -i /tmp/nats.deb && rm -f /tmp/nats.deb
 
 WORKDIR /app
