@@ -1,4 +1,7 @@
 FROM mlocati/php-extension-installer:2.2.2 as php_ext_installer
+FROM stephenc/envsub:0.1.3 as envsub
+FROM composer/composer:2.7.1-bin as composer
+FROM perconalab/percona-toolkit:3.5.7 as pt_toolkit
 
 FROM php:8.1.27-fpm
 
@@ -24,6 +27,18 @@ RUN install-php-extensions uuid
 RUN install-php-extensions xsl
 RUN install-php-extensions zip
 
+COPY --from=envsub /bin/envsub /usr/bin/
+COPY --from=composer /composer /usr/bin/composer
+COPY --from=pt_toolkit /usr/bin/pt-online-schema-change /usr/bin/
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    procps \
+    libfcgi-bin && \
+    rm -rf /var/lib/apt/lists/*
+
+ADD 'https://raw.githubusercontent.com/renatomefi/php-fpm-healthcheck/v0.5.0/php-fpm-healthcheck' /usr/bin/php-fpm-healthcheck
+RUN chmod +rx /usr/bin/php-fpm-healthcheck
+
 # https://docs.newrelic.com/docs/release-notes/agent-release-notes/php-release-notes/
 ADD 'https://download.newrelic.com/php_agent/archive/10.16.0.5/newrelic-php5-10.16.0.5-linux.tar.gz' /tmp/newrelic.tar.gz
 RUN cd /tmp && tar -xf newrelic.tar.gz && cd newrelic-* && NR_INSTALL_SILENT=true ./newrelic-install install && cp --remove-destination "$(readlink "$(php -r "echo ini_get ('extension_dir');")/newrelic.so")" "$(php -r "echo ini_get ('extension_dir');")/newrelic.so" && rm -rf /tmp/newrelic*
@@ -32,3 +47,5 @@ ADD 'https://github.com/nats-io/natscli/releases/latest/download/nats-0.1.3-amd6
 RUN dpkg -i /tmp/nats.deb && rm -f /tmp/nats.deb
 
 WORKDIR /app
+
+ENV COMPOSER_ALLOW_SUPERUSER=1
