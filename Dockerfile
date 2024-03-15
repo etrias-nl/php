@@ -43,7 +43,7 @@ RUN curl -L 'https://raw.githubusercontent.com/renatomefi/php-fpm-healthcheck/v0
 RUN curl -L 'https://download.newrelic.com/php_agent/archive/10.16.0.5/newrelic-php5-10.16.0.5-linux.tar.gz' -o /tmp/newrelic.tar.gz && \
     cd /tmp && tar -xf newrelic.tar.gz && cd newrelic-* && NR_INSTALL_SILENT=true ./newrelic-install install && cp --remove-destination "$(readlink "$(php -r "echo ini_get ('extension_dir');")/newrelic.so")" "$(php -r "echo ini_get ('extension_dir');")/newrelic.so" && rm -rf /tmp/newrelic*
 
-RUN curl -L 'https://github.com/nats-io/natscli/releases/latest/download/nats-0.1.3-amd64.deb' -o /tmp/nats.deb && \
+RUN curl -L 'https://github.com/nats-io/natscli/releases/latest/download/nats-0.1.4-amd64.deb' -o /tmp/nats.deb && \
     dpkg -i /tmp/nats.deb && rm -f /tmp/nats.deb
 
 WORKDIR /app
