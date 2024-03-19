@@ -31,7 +31,8 @@ COPY --from=envsub /bin/envsub /usr/bin/
 COPY --from=composer /composer /usr/bin/composer
 COPY --from=pt_toolkit /usr/bin/pt-online-schema-change /usr/bin/
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN --mount=type=cache,target=/var/cache/apt \
+    apt-get update && apt-get install -y --no-install-recommends \
     procps \
     libfcgi-bin && \
     rm -rf /var/lib/apt/lists/*
