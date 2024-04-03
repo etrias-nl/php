@@ -10,6 +10,7 @@ RUN ln -sr /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini
 COPY --from=php_ext_installer /usr/bin/install-php-extensions /usr/bin/
 RUN install-php-extensions apcu
 RUN install-php-extensions bcmath
+RUN install-php-extensions blackfire
 RUN install-php-extensions calendar
 RUN install-php-extensions exif
 RUN install-php-extensions gd
