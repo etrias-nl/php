@@ -25,7 +25,7 @@ jobs:
                 with:
                     buildkitd-config-inline: |
                         [registry."docker.io"]
-                        mirrors = ["mirror.gcr.io"]
+                            mirrors = ["mirror.gcr.io"]
             -
                 id: build
                 uses: docker/build-push-action@v5.3.0
