@@ -29,6 +29,8 @@ RUN install-php-extensions uuid
 RUN install-php-extensions xsl
 RUN install-php-extensions zip
 
+RUN sed -i 's~tcp://blackfire:8307~tcp://127.0.0.1:8307~' /usr/local/etc/php/conf.d/docker-php-ext-blackfire.ini
+RUN echo 'blackfire.apm_enabled = 0' >> /usr/local/etc/php/conf.d/docker-php-ext-blackfire.ini
 RUN sed -i -E 's~/var/log/newrelic/.++\.log~/dev/null~' /usr/local/etc/php/conf.d/newrelic.ini
 
 COPY --from=envsub /bin/envsub /usr/bin/
