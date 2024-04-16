@@ -43,6 +43,7 @@ jobs:
                     docker run --rm "${{ steps.build.outputs.imageid }}" composer --version
                     docker run --rm "${{ steps.build.outputs.imageid }}" pt-online-schema-change --version
                     docker run --rm "${{ steps.build.outputs.imageid }}" nats --version
+                    docker run --rm "${{ steps.build.outputs.imageid }}" blackfire version
             -
                 uses: docker/login-action@v3.1.0
                 with:

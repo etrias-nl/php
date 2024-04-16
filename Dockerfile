@@ -32,9 +32,9 @@ RUN install-php-extensions zip
 RUN echo 'blackfire.apm_enabled = 0' >> /usr/local/etc/php/conf.d/docker-php-ext-blackfire.ini
 RUN sed -i -E 's~/var/log/newrelic/.++\.log~/dev/null~' /usr/local/etc/php/conf.d/newrelic.ini
 
-COPY --from=envsub /bin/envsub /usr/bin/
+COPY --from=envsub /bin/envsub /usr/bin/envsub
 COPY --from=composer /composer /usr/bin/composer
-COPY --from=pt_toolkit /usr/bin/pt-online-schema-change /usr/bin/
+COPY --from=pt_toolkit /usr/bin/pt-online-schema-change /usr/bin/pt-online-schema-change
 
 RUN --mount=type=cache,target=/var/cache/apt \
     apt-get update && apt-get install -y --no-install-recommends \
@@ -44,6 +44,9 @@ RUN --mount=type=cache,target=/var/cache/apt \
 
 RUN curl -L 'https://raw.githubusercontent.com/renatomefi/php-fpm-healthcheck/v0.5.0/php-fpm-healthcheck' -o /usr/bin/php-fpm-healthcheck && \
     chmod +x /usr/bin/php-fpm-healthcheck
+
+RUN mkdir -p /tmp/blackfire && curl -L "https://blackfire.io/api/v1/releases/cli/linux/$(uname -m)" | tar zxp -C /tmp/blackfire \
+    && mv /tmp/blackfire/blackfire /usr/bin/blackfire && rm -Rf /tmp/blackfire
 
 RUN curl -L 'https://github.com/nats-io/natscli/releases/latest/download/nats-0.1.4-amd64.deb' -o /tmp/nats.deb && \
     dpkg -i /tmp/nats.deb && rm -f /tmp/nats.deb
