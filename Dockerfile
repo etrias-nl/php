@@ -31,6 +31,7 @@ RUN install-php-extensions zip
 
 RUN echo 'blackfire.apm_enabled = 0' >> /usr/local/etc/php/conf.d/docker-php-ext-blackfire.ini
 RUN sed -i -E 's~/var/log/newrelic/.++\.log~/dev/null~' /usr/local/etc/php/conf.d/newrelic.ini
+RUN echo 'newrelic.daemon.dont_launch = 3' >> /usr/local/etc/php/conf.d/newrelic.ini
 
 COPY --from=envsub /bin/envsub /usr/bin/envsub
 COPY --from=composer /composer /usr/bin/composer
