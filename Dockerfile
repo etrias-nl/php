@@ -19,7 +19,8 @@ RUN install-php-extensions gmagick
 RUN install-php-extensions igbinary
 RUN install-php-extensions imap
 RUN install-php-extensions intl
-RUN install-php-extensions newrelic
+RUN IPE_NEWRELIC_DAEMON=0 IPE_NEWRELIC_KEEPLOG=0 \
+    install-php-extensions newrelic
 RUN install-php-extensions opcache
 RUN install-php-extensions pcntl
 RUN install-php-extensions pdo_mysql
