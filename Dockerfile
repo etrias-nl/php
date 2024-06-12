@@ -1,4 +1,4 @@
-FROM mlocati/php-extension-installer:2.2.15 as php_ext_installer
+FROM mlocati/php-extension-installer:2.2.16 as php_ext_installer
 FROM stephenc/envsub:0.1.3 as envsub
 FROM composer/composer:2.7.7-bin as composer
 FROM perconalab/percona-toolkit:3.5.7 as pt_toolkit
