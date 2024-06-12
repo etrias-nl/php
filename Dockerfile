@@ -1,4 +1,4 @@
-FROM mlocati/php-extension-installer:2.2.15 as php_ext_installer
+FROM mlocati/php-extension-installer:2.2.16 as php_ext_installer
 FROM stephenc/envsub:0.1.3 as envsub
 FROM composer/composer:2.7.7-bin as composer
 FROM perconalab/percona-toolkit:3.5.7 as pt_toolkit
@@ -19,7 +19,8 @@ RUN install-php-extensions gmagick
 RUN install-php-extensions igbinary
 RUN install-php-extensions imap
 RUN install-php-extensions intl
-RUN install-php-extensions newrelic
+RUN IPE_NEWRELIC_DAEMON=0 IPE_NEWRELIC_KEEPLOG=0 \
+    install-php-extensions newrelic
 RUN install-php-extensions opcache
 RUN install-php-extensions pcntl
 RUN install-php-extensions pdo_mysql
