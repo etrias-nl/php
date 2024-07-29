@@ -14,9 +14,9 @@ RUN install-php-extensions blackfire
 RUN install-php-extensions calendar
 RUN install-php-extensions exif
 RUN install-php-extensions gd
-RUN install-php-extensions php/pecl-networking-gearman@7033013a1e10add4edb3056a27d62bb4708e942b
+RUN install-php-extensions php/pecl-networking-gearman@7033013a1e10add4edb3056a27d62bb4708e942b # @deprecated
 RUN install-php-extensions gmagick
-RUN install-php-extensions igbinary
+RUN install-php-extensions igbinary # @deprecated
 RUN install-php-extensions imap
 RUN install-php-extensions intl
 RUN IPE_NEWRELIC_DAEMON=0 IPE_NEWRELIC_KEEPLOG=0 \
@@ -41,7 +41,8 @@ COPY --from=pt_toolkit /usr/bin/pt-online-schema-change /usr/bin/pt-online-schem
 RUN --mount=type=cache,target=/var/cache/apt \
     apt-get update && apt-get install -y --no-install-recommends \
     procps \
-    libfcgi-bin && \
+    libfcgi-bin \
+    ghostscript && \
     rm -rf /var/lib/apt/lists/*
 
 RUN curl -L 'https://raw.githubusercontent.com/renatomefi/php-fpm-healthcheck/v0.5.0/php-fpm-healthcheck' -o /usr/bin/php-fpm-healthcheck && \
