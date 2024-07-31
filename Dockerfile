@@ -47,7 +47,6 @@ RUN curl -L 'https://raw.githubusercontent.com/renatomefi/php-fpm-healthcheck/v0
 RUN mkdir -p /tmp/blackfire && curl -L "https://blackfire.io/api/v1/releases/cli/linux/$(uname -m)" | tar zxp -C /tmp/blackfire \
     && mv /tmp/blackfire/blackfire /usr/bin/blackfire && rm -Rf /tmp/blackfire
 
-
 RUN curl -L "https://github.com/nats-io/natscli/releases/latest/download/nats-$(curl -sSf 'https://api.github.com/repos/nats-io/natscli/releases/latest' | grep '"tag_name":' | sed -E 's/.*"tag_name": "v([^"]+)".*/\1/')-amd64.deb" -o /tmp/nats.deb && \
     dpkg -i /tmp/nats.deb && rm -f /tmp/nats.deb
 
