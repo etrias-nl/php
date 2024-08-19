@@ -14,9 +14,7 @@ RUN install-php-extensions blackfire
 RUN install-php-extensions calendar
 RUN install-php-extensions exif
 RUN install-php-extensions gd
-RUN install-php-extensions php/pecl-networking-gearman@7033013a1e10add4edb3056a27d62bb4708e942b # @deprecated
 RUN install-php-extensions gmagick
-RUN install-php-extensions igbinary # @deprecated
 RUN install-php-extensions imap
 RUN install-php-extensions intl
 RUN IPE_NEWRELIC_DAEMON=0 IPE_NEWRELIC_KEEPLOG=0 \
