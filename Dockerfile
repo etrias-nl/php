@@ -10,7 +10,7 @@ RUN ln -sr /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini
 COPY --from=php_ext_installer /usr/bin/install-php-extensions /usr/bin/
 RUN install-php-extensions apcu
 RUN install-php-extensions bcmath
-RUN install-php-extensions blackfire
+#RUN install-php-extensions blackfire
 RUN install-php-extensions calendar
 RUN install-php-extensions exif
 RUN install-php-extensions gd
@@ -42,13 +42,13 @@ RUN --mount=type=cache,target=/var/cache/apt \
 RUN curl -L 'https://raw.githubusercontent.com/renatomefi/php-fpm-healthcheck/v0.5.0/php-fpm-healthcheck' -o /usr/bin/php-fpm-healthcheck && \
     chmod +x /usr/bin/php-fpm-healthcheck
 
-RUN mkdir -p /tmp/blackfire && curl -L "https://blackfire.io/api/v1/releases/cli/linux/$(uname -m)" | tar zxp -C /tmp/blackfire && \
-    mv /tmp/blackfire/blackfire /usr/bin/blackfire && rm -Rf /tmp/blackfire
+#RUN mkdir -p /tmp/blackfire && curl -L "https://blackfire.io/api/v1/releases/cli/linux/$(uname -m)" | tar zxp -C /tmp/blackfire && \
+#    mv /tmp/blackfire/blackfire /usr/bin/blackfire && rm -Rf /tmp/blackfire
 
 RUN curl -L "https://github.com/nats-io/natscli/releases/latest/download/nats-$(curl -sSf 'https://api.github.com/repos/nats-io/natscli/releases/latest' | grep '"tag_name":' | sed -E 's/.*"tag_name": "v([^"]+)".*/\1/')-amd64.deb" -o /tmp/nats.deb && \
     dpkg -i /tmp/nats.deb && rm -f /tmp/nats.deb
 
-RUN echo 'blackfire.apm_enabled = 0' >> /usr/local/etc/php/conf.d/docker-php-ext-blackfire.ini
+#RUN echo 'blackfire.apm_enabled = 0' >> /usr/local/etc/php/conf.d/docker-php-ext-blackfire.ini
 RUN echo 'newrelic.enabled = 0' >> /usr/local/etc/php/conf.d/newrelic.ini
 RUN echo 'newrelic.daemon.dont_launch = 3' >> /usr/local/etc/php/conf.d/newrelic.ini
 RUN echo 'newrelic.loglevel = "warning"' >> /usr/local/etc/php/conf.d/newrelic.ini
