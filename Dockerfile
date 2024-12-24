@@ -1,7 +1,6 @@
 FROM mlocati/php-extension-installer:2.7.8 AS php_ext_installer
 FROM stephenc/envsub:0.1.3 AS envsub
 FROM composer/composer:2.8.4-bin AS composer
-FROM perconalab/percona-toolkit:3.5.7 AS pt_toolkit
 
 FROM php:8.3.14-fpm
 
@@ -31,10 +30,10 @@ RUN install-php-extensions zip
 
 COPY --from=envsub /bin/envsub /usr/bin/envsub
 COPY --from=composer /composer /usr/bin/composer
-COPY --from=pt_toolkit /usr/bin/pt-online-schema-change /usr/bin/pt-online-schema-change
 
 RUN --mount=type=cache,target=/var/cache/apt \
     apt-get update && apt-get install -y --no-install-recommends \
+    percona-toolkit \
     procps \
     libfcgi-bin \
     ghostscript && \
