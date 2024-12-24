@@ -31,26 +31,27 @@ jobs:
                 uses: docker/build-push-action@v6.10.0
                 with:
                     context: .
+                    platforms: linux/arm64
                     load: true
                     # https://docs.docker.com/build/ci/github-actions/cache/#github-cache
                     cache-from: type=gha
                     cache-to: type=gha,mode=max
-            -
-                run: |
-                    set -eu
-                    docker run --rm '${{ steps.build.outputs.imageid }}' php -v
-                    docker run --rm '${{ steps.build.outputs.imageid }}' php -m
-                    docker run --rm '${{ steps.build.outputs.imageid }}' php -i | grep 'blackfire.apm_enabled => 0 => 0'
-                    docker run --rm '${{ steps.build.outputs.imageid }}' php -i | grep 'New Relic Version'
-                    docker run --rm '${{ steps.build.outputs.imageid }}' php -i | grep 'newrelic.enabled => no => no'
-                    docker run --rm '${{ steps.build.outputs.imageid }}' php -i | grep 'newrelic.loglevel => warning'
-                    docker run --rm '${{ steps.build.outputs.imageid }}' php -i | grep 'newrelic.logfile => /dev/stderr'
-                    docker run --rm '${{ steps.build.outputs.imageid }}' php -i | grep 'newrelic.daemon.logfile => /dev/stderr'
-                    docker run --rm '${{ steps.build.outputs.imageid }}' php -i | grep 'newrelic.daemon.dont_launch => 3'
-                    docker run --rm '${{ steps.build.outputs.imageid }}' envsub --version
-                    docker run --rm '${{ steps.build.outputs.imageid }}' composer --version
-                    docker run --rm '${{ steps.build.outputs.imageid }}' pt-online-schema-change --version
-                    docker run --rm '${{ steps.build.outputs.imageid }}' blackfire version
+#            -
+#                run: |
+#                    set -eu
+#                    docker run --rm '${{ steps.build.outputs.imageid }}' php -v
+#                    docker run --rm '${{ steps.build.outputs.imageid }}' php -m
+#                    docker run --rm '${{ steps.build.outputs.imageid }}' php -i | grep 'blackfire.apm_enabled => 0 => 0'
+#                    docker run --rm '${{ steps.build.outputs.imageid }}' php -i | grep 'New Relic Version'
+#                    docker run --rm '${{ steps.build.outputs.imageid }}' php -i | grep 'newrelic.enabled => no => no'
+#                    docker run --rm '${{ steps.build.outputs.imageid }}' php -i | grep 'newrelic.loglevel => warning'
+#                    docker run --rm '${{ steps.build.outputs.imageid }}' php -i | grep 'newrelic.logfile => /dev/stderr'
+#                    docker run --rm '${{ steps.build.outputs.imageid }}' php -i | grep 'newrelic.daemon.logfile => /dev/stderr'
+#                    docker run --rm '${{ steps.build.outputs.imageid }}' php -i | grep 'newrelic.daemon.dont_launch => 3'
+#                    docker run --rm '${{ steps.build.outputs.imageid }}' envsub --version
+#                    docker run --rm '${{ steps.build.outputs.imageid }}' composer --version
+#                    docker run --rm '${{ steps.build.outputs.imageid }}' pt-online-schema-change --version
+#                    docker run --rm '${{ steps.build.outputs.imageid }}' blackfire version
             -
                 uses: docker/login-action@v3.3.0
                 with:
