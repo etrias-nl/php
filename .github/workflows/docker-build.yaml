@@ -31,7 +31,6 @@ jobs:
                 uses: docker/build-push-action@v6.10.0
                 with:
                     context: .
-                    platforms: linux/amd64,linux/arm64
                     load: true
                     # https://docs.docker.com/build/ci/github-actions/cache/#github-cache
                     cache-from: type=gha
