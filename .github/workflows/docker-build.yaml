@@ -54,7 +54,7 @@ jobs:
                     docker run --rm '${{ steps.build.outputs.imageid }}' blackfire version
             -
                 uses: docker/setup-qemu-action@v3.2.0
-                if: github.ref_type == 'tag'q
+                if: github.ref_type == 'tag'
             -
                 uses: docker/login-action@v3.3.0
                 with:
