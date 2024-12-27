@@ -1,5 +1,4 @@
 FROM mlocati/php-extension-installer:2.7.8 AS php_ext_installer
-FROM registry.k8s-bizhost.nl/library/envsub:0.1.3 AS envsub
 FROM composer/composer:2.8.4-bin AS composer
 
 FROM php:8.3.15-fpm
@@ -28,7 +27,6 @@ RUN install-php-extensions uuid
 RUN install-php-extensions xsl
 RUN install-php-extensions zip
 
-COPY --from=envsub /bin/envsub /usr/bin/envsub
 COPY --from=composer /composer /usr/bin/composer
 
 RUN --mount=type=cache,target=/var/cache/apt \
