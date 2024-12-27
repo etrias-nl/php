@@ -16,7 +16,7 @@ env:
 
 jobs:
     build:
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-bizhost
         steps:
             -
                 uses: actions/checkout@v4.2.2
@@ -48,7 +48,6 @@ jobs:
 #                    docker run --rm '${{ steps.build.outputs.imageid }}' php -i | grep 'newrelic.logfile => /dev/stderr'
 #                    docker run --rm '${{ steps.build.outputs.imageid }}' php -i | grep 'newrelic.daemon.logfile => /dev/stderr'
 #                    docker run --rm '${{ steps.build.outputs.imageid }}' php -i | grep 'newrelic.daemon.dont_launch => 3'
-#                    docker run --rm '${{ steps.build.outputs.imageid }}' envsub --version
 #                    docker run --rm '${{ steps.build.outputs.imageid }}' composer --version
 #                    docker run --rm '${{ steps.build.outputs.imageid }}' pt-online-schema-change --version
 #                    docker run --rm '${{ steps.build.outputs.imageid }}' blackfire version
