@@ -32,8 +32,8 @@ jobs:
                     context: .
                     load: true
                     # https://docs.docker.com/build/ci/github-actions/cache/#github-cache
-                    cache-from: type=gha
-                    cache-to: type=gha,mode=max
+                    cache-from: type=gha,scope=build-${{ matrix.runner }}
+                    cache-to: type=gha,scope=build-${{ matrix.runner }},mode=max
             -
                 run: |
                     set -eu
