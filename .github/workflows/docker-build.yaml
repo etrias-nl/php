@@ -55,7 +55,7 @@ jobs:
                 with:
                     username: ${{ secrets.DOCKER_HUB_USERNAME }}
                     password: ${{ secrets.DOCKER_HUB_PASSWORD }}
-                #if: github.ref_type == 'tag'
+                if: github.ref_type == 'tag'
             -
                 id: meta
                 uses: docker/metadata-action@v5.6.1
@@ -64,7 +64,7 @@ jobs:
                     flavor: |
                         latest=false
                         suffix=-${{ matrix.runner }}
-                #if: github.ref_type == 'tag'
+                if: github.ref_type == 'tag'
             -
                 uses: docker/build-push-action@v6.13.0
                 with:
@@ -76,11 +76,11 @@ jobs:
                     # https://docs.docker.com/build/ci/github-actions/cache/#github-cache
                     cache-from: type=inline,scope=build-${{ matrix.runner }}
                     cache-to: type=gha,scope=build-${{ matrix.runner }}
-                #if: github.ref_type == 'tag'
+                if: github.ref_type == 'tag'
     push:
         needs: [ build ]
         runs-on: ubuntu-latest
-        #if: github.ref_type == 'tag'
+        if: github.ref_type == 'tag'
         steps:
             -
                 uses: actions/checkout@v4.2.2
