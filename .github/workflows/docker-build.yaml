@@ -51,7 +51,7 @@ jobs:
                     docker run --rm '${{ steps.build.outputs.imageid }}' blackfire version
     push:
         needs: [ build ]
-        runs-on: ubuntu-bizhost
+        runs-on: ubuntu-latest
         if: github.ref_type == 'tag'
         steps:
             -
@@ -68,6 +68,8 @@ jobs:
                 uses: docker/metadata-action@v5.6.1
                 with:
                     images: ${{ env.DOCKER_IMAGE }}
+            -
+                uses: docker/setup-qemu-action@v3.4.0
             -
                 uses: docker/build-push-action@v6.13.0
                 with:
