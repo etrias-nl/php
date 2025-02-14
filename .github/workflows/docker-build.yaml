@@ -69,8 +69,6 @@ jobs:
                 with:
                     images: ${{ env.DOCKER_IMAGE }}
             -
-                uses: docker/setup-qemu-action@v3.4.0
-            -
                 uses: docker/build-push-action@v6.13.0
                 with:
                     context: .
