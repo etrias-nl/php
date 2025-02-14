@@ -31,6 +31,7 @@ jobs:
                 with:
                     context: .
                     load: true
+                    provenance: false
                     # https://docs.docker.com/build/ci/github-actions/cache/#github-cache
                     cache-from: type=gha,scope=build-${{ matrix.runner }}
                     cache-to: type=inline,scope=build-${{ matrix.runner }}
@@ -69,7 +70,7 @@ jobs:
                 with:
                     context: .
                     push: true
-                    platforms: linux/amd64,linux/arm64
+                    provenance: false
                     tags: ${{ steps.meta.outputs.tags }}
                     labels: ${{ steps.meta.outputs.labels }}
                     # https://docs.docker.com/build/ci/github-actions/cache/#github-cache
