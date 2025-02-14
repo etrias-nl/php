@@ -97,11 +97,8 @@ jobs:
                     flavor: |
                         latest=false
             -
-                run: |
-                    echo "${{ steps.meta.outputs.tags }}"
-#            -
-#                uses: Noelware/docker-manifest-action@0.4.2
-#                with:
-#                    inputs: namespace/image:latest
-#                    images: namespace/image:latest-amd64[,namespace/other-image:latest-arm64]
-#                    push: false #true
+                uses: Noelware/docker-manifest-action@0.4.2
+                with:
+                    inputs: ${{ steps.meta.outputs.tags }}
+                    images: ${{ steps.meta.outputs.tags }}-ubuntu-latest,${{ steps.meta.outputs.tags }}-ubuntu-bizhost
+                    push: false #true
