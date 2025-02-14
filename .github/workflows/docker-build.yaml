@@ -31,9 +31,10 @@ jobs:
                 with:
                     context: .
                     load: true
+                    provenance: false
                     # https://docs.docker.com/build/ci/github-actions/cache/#github-cache
                     cache-from: type=gha,scope=build-${{ matrix.runner }}
-                    cache-to: type=gha,scope=build-${{ matrix.runner }},mode=max
+                    cache-to: type=inline,scope=build-${{ matrix.runner }}
             -
                 run: |
                     set -eu
@@ -49,6 +50,33 @@ jobs:
                     docker run --rm '${{ steps.build.outputs.imageid }}' composer --version
                     docker run --rm '${{ steps.build.outputs.imageid }}' pt-online-schema-change --version
                     docker run --rm '${{ steps.build.outputs.imageid }}' blackfire version
+            -
+                uses: docker/login-action@v3.3.0
+                with:
+                    username: ${{ secrets.DOCKER_HUB_USERNAME }}
+                    password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+                if: github.ref_type == 'tag'
+            -
+                id: meta
+                uses: docker/metadata-action@v5.6.1
+                with:
+                    images: ${{ env.DOCKER_IMAGE }}
+                    flavor: |
+                        latest=false
+                        suffix=-${{ matrix.runner }}
+                if: github.ref_type == 'tag'
+            -
+                uses: docker/build-push-action@v6.13.0
+                with:
+                    context: .
+                    push: true
+                    provenance: false
+                    tags: ${{ steps.meta.outputs.tags }}
+                    labels: ${{ steps.meta.outputs.labels }}
+                    # https://docs.docker.com/build/ci/github-actions/cache/#github-cache
+                    cache-from: type=inline,scope=build-${{ matrix.runner }}
+                    cache-to: type=gha,scope=build-${{ matrix.runner }}
+                if: github.ref_type == 'tag'
     push:
         needs: [ build ]
         runs-on: ubuntu-latest
@@ -68,13 +96,11 @@ jobs:
                 uses: docker/metadata-action@v5.6.1
                 with:
                     images: ${{ env.DOCKER_IMAGE }}
+                    flavor: |
+                        latest=false
             -
-                uses: docker/build-push-action@v6.13.0
+                uses: Noelware/docker-manifest-action@0.4.2
                 with:
-                    context: .
+                    inputs: ${{ steps.meta.outputs.tags }}
+                    images: ${{ steps.meta.outputs.tags }}-ubuntu-latest,${{ steps.meta.outputs.tags }}-ubuntu-bizhost
                     push: true
-                    platforms: linux/amd64,linux/arm64
-                    tags: ${{ steps.meta.outputs.tags }}
-                    labels: ${{ steps.meta.outputs.labels }}
-                    # https://docs.docker.com/build/ci/github-actions/cache/#github-cache
-                    cache-from: type=gha
