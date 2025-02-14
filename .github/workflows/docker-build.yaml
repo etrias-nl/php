@@ -51,7 +51,7 @@ jobs:
                     docker run --rm '${{ steps.build.outputs.imageid }}' blackfire version
     push:
         needs: [ build ]
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-bizhost
         if: github.ref_type == 'tag'
         steps:
             -
