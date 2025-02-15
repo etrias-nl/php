@@ -99,7 +99,7 @@ jobs:
                     flavor: |
                         latest=false
             -
-                uses: Noelware/docker-manifest-action@0.4.2
+                uses: Noelware/docker-manifest-action@0.4.3
                 with:
                     inputs: ${{ steps.meta.outputs.tags }}
                     images: ${{ steps.meta.outputs.tags }}-ubuntu-latest,${{ steps.meta.outputs.tags }}-ubuntu-bizhost
