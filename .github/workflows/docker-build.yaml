@@ -37,7 +37,7 @@ jobs:
                     cache-to: type=gha,scope=build-${{ matrix.runner }},mode=max
             -
                 run: |
-                    set -eu
+                    set -eux
                     docker run --rm '${{ steps.build.outputs.imageid }}' php -v
                     docker run --rm '${{ steps.build.outputs.imageid }}' php -m
                     docker run --rm '${{ steps.build.outputs.imageid }}' php -i | grep 'blackfire.apm_enabled => 0 => 0'
