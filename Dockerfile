@@ -1,4 +1,4 @@
-FROM mlocati/php-extension-installer:2.7.27 AS php_ext_installer
+FROM mlocati/php-extension-installer:2.7.28 AS php_ext_installer
 FROM composer/composer:2.8.6-bin AS composer
 
 FROM php:8.3.17-fpm
