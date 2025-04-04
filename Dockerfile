@@ -1,5 +1,5 @@
 FROM mlocati/php-extension-installer:2.7.29 AS php_ext_installer
-FROM composer/composer:2.8.6-bin AS composer
+FROM composer/composer:2.8.7-bin AS composer
 
 FROM php:8.3.19-fpm
 
