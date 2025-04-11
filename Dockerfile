@@ -1,7 +1,7 @@
 FROM mlocati/php-extension-installer:2.7.30 AS php_ext_installer
 FROM composer/composer:2.8.8-bin AS composer
 
-FROM php:8.3.19-fpm
+FROM php:8.3.20-fpm
 
 RUN ln -sr /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini
 
