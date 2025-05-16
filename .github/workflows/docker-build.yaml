@@ -105,6 +105,6 @@ jobs:
             -
                 uses: Noelware/docker-manifest-action@1.0.0
                 with:
-                    inputs: ${{ steps.meta.outputs.tags }}
-                    tags: ${{ steps.meta.outputs.tags }}-ubuntu-latest,${{ steps.meta.outputs.tags }}-ubuntu-bizhost
+                    tags: ${{ steps.meta.outputs.tags }}
+                    inputs: ${{ steps.meta.outputs.tags }}-ubuntu-latest,${{ steps.meta.outputs.tags }}-ubuntu-bizhost
                     push: true
