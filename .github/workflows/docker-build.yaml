@@ -18,7 +18,7 @@ jobs:
     build:
         strategy:
             matrix:
-                runner: [ ubuntu-latest, ubuntu-bizhost ]
+                runner: [ ubuntu-latest, etrias-staging ]
         runs-on: ${{ matrix.runner }}
         steps:
             -
