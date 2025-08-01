@@ -60,7 +60,7 @@ jobs:
                 if: github.ref_type == 'tag'
             -
                 id: meta
-                uses: docker/metadata-action@v5.7.0
+                uses: docker/metadata-action@v5.8.0
                 with:
                     images: ${{ env.DOCKER_IMAGE }}
                     flavor: |
@@ -97,7 +97,7 @@ jobs:
                     password: ${{ secrets.DOCKER_HUB_PASSWORD }}
             -
                 id: meta
-                uses: docker/metadata-action@v5.7.0
+                uses: docker/metadata-action@v5.8.0
                 with:
                     images: ${{ env.DOCKER_IMAGE }}
                     flavor: |
