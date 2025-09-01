@@ -21,6 +21,7 @@ RUN IPE_NEWRELIC_DAEMON=0 IPE_NEWRELIC_KEEPLOG=0 \
 RUN install-php-extensions opcache
 RUN install-php-extensions pcntl
 RUN install-php-extensions pdo_mysql
+RUN install-php-extensions redis
 RUN install-php-extensions soap
 RUN install-php-extensions sockets
 RUN install-php-extensions uuid
