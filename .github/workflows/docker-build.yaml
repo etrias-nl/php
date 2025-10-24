@@ -18,7 +18,7 @@ jobs:
     build:
         strategy:
             matrix:
-                runner: [ ubuntu-latest, etrias ]
+                runner: [ amd64, arm64 ]
         runs-on: ${{ matrix.runner }}
         steps:
             -
