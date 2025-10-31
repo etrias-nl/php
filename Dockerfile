@@ -49,7 +49,7 @@ RUN install-php-extensions uuid-${EXT_UUID_VERSION}
 RUN install-php-extensions xsl
 
 # renovate: datasource=github-tags depName=ext-zip packageName=pierrejoye/php_zip
-ENV EXT_ZIP_VERSION=1.22.3
+ENV EXT_ZIP_VERSION=1.22.7
 RUN install-php-extensions zip-${EXT_ZIP_VERSION}
 
 RUN mkdir -p /tmp/blackfire && curl -L "https://blackfire.io/api/v1/releases/cli/linux/$(uname -m)" | tar zxp -C /tmp/blackfire && \
