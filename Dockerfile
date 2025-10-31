@@ -17,7 +17,7 @@ COPY --from=composer /composer /usr/bin/composer
 COPY --from=php_ext_installer /usr/bin/install-php-extensions /usr/bin/
 
 # renovate: datasource=github-releases depName=ext-apcu packageName=krakjoe/apcu
-ENV EXT_APCU_VERSION=5.1.24
+ENV EXT_APCU_VERSION=5.1.27
 RUN install-php-extensions apcu-${EXT_APCU_VERSION}
 
 RUN install-php-extensions bcmath
@@ -29,11 +29,8 @@ RUN install-php-extensions gd
 RUN install-php-extensions gmagick
 RUN install-php-extensions imap
 RUN install-php-extensions intl
-
-# renovate: datasource=github-releases depName=ext-newrelic packageName=newrelic/newrelic-php-agent
-ENV EXT_NEWRELIC_VERSION=11.10.0.24
-RUN IPE_NEWRELIC_DAEMON=0 IPE_NEWRELIC_KEEPLOG=0 install-php-extensions newrelic-${EXT_NEWRELIC_VERSION}
-
+RUN IPE_NEWRELIC_DAEMON=0 IPE_NEWRELIC_KEEPLOG=0 \
+    install-php-extensions newrelic
 RUN install-php-extensions opcache
 RUN install-php-extensions pcntl
 RUN install-php-extensions pdo_mysql
