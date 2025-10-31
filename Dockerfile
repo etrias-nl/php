@@ -1,7 +1,7 @@
 FROM mlocati/php-extension-installer:2.9.13 AS php_ext_installer
 FROM composer/composer:2.8.12-bin AS composer
 
-FROM php:8.3.27-fpm-bookworm
+FROM php:8.4.14-fpm-bookworm
 
 RUN ln -sr /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini
 
@@ -49,7 +49,7 @@ RUN install-php-extensions uuid-${EXT_UUID_VERSION}
 RUN install-php-extensions xsl
 
 # renovate: datasource=github-tags depName=ext-zip packageName=pierrejoye/php_zip
-ENV EXT_ZIP_VERSION=1.22.3
+ENV EXT_ZIP_VERSION=1.22.7
 RUN install-php-extensions zip-${EXT_ZIP_VERSION}
 
 RUN mkdir -p /tmp/blackfire && curl -L "https://blackfire.io/api/v1/releases/cli/linux/$(uname -m)" | tar zxp -C /tmp/blackfire && \
