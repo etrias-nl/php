@@ -44,7 +44,6 @@ jobs:
                     docker run --rm '${{ steps.build.outputs.imageid }}' php -v
                     docker run --rm '${{ steps.build.outputs.imageid }}' php -m
                     docker run --rm '${{ steps.build.outputs.imageid }}' php -i | grep 'blackfire.apm_enabled => 0 => 0'
-                    docker run --rm '${{ steps.build.outputs.imageid }}' php -i | grep 'New Relic Version'
                     docker run --rm '${{ steps.build.outputs.imageid }}' php -i | grep 'newrelic.enabled => no => no'
                     docker run --rm '${{ steps.build.outputs.imageid }}' php -i | grep 'newrelic.loglevel => warning'
                     docker run --rm '${{ steps.build.outputs.imageid }}' php -i | grep 'newrelic.logfile => /dev/stderr'
@@ -53,6 +52,11 @@ jobs:
                     docker run --rm '${{ steps.build.outputs.imageid }}' composer --version
                     docker run --rm '${{ steps.build.outputs.imageid }}' pt-online-schema-change --version
                     docker run --rm '${{ steps.build.outputs.imageid }}' blackfire version
+            -
+                name: extension-versions
+                run: |
+                    set -eux
+                    docker run --rm '${{ steps.build.outputs.imageid }}' php -r 'foreach (get_loaded_extensions() as $ext) { printf("%-20s %s\n", $ext, phpversion($ext) ?: "(bundled/no version)"); }'
             -
                 uses: docker/login-action@v3.6.0
                 with:
