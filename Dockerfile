@@ -5,7 +5,17 @@ FROM php:8.3.27-fpm-bookworm
 
 RUN ln -sr /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini
 
+RUN --mount=type=cache,target=/var/cache/apt \
+    apt-get update && apt-get install -y --no-install-recommends \
+    percona-toolkit \
+    procps \
+    libfcgi-bin \
+    ghostscript && \
+    rm -rf /var/lib/apt/lists/*
+
+COPY --from=composer /composer /usr/bin/composer
 COPY --from=php_ext_installer /usr/bin/install-php-extensions /usr/bin/
+
 RUN install-php-extensions apcu
 RUN install-php-extensions bcmath
 RUN install-php-extensions blackfire
@@ -32,19 +42,8 @@ RUN install-php-extensions uuid
 RUN install-php-extensions xsl
 RUN install-php-extensions zip
 
-COPY --from=composer /composer /usr/bin/composer
-
-RUN --mount=type=cache,target=/var/cache/apt \
-    apt-get update && apt-get install -y --no-install-recommends \
-    percona-toolkit \
-    procps \
-    libfcgi-bin \
-    ghostscript && \
-    rm -rf /var/lib/apt/lists/*
-
 RUN mkdir -p /tmp/blackfire && curl -L "https://blackfire.io/api/v1/releases/cli/linux/$(uname -m)" | tar zxp -C /tmp/blackfire && \
     mv /tmp/blackfire/blackfire /usr/bin/blackfire && rm -Rf /tmp/blackfire
-
 RUN echo 'blackfire.apm_enabled = 0' >> /usr/local/etc/php/conf.d/docker-php-ext-blackfire.ini
 RUN echo 'newrelic.enabled = 0' >> /usr/local/etc/php/conf.d/newrelic.ini
 RUN echo 'newrelic.daemon.dont_launch = 3' >> /usr/local/etc/php/conf.d/newrelic.ini
