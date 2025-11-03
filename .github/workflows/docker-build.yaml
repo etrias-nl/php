@@ -56,7 +56,7 @@ jobs:
                 name: extension-versions
                 run: |
                     set -eux
-                    docker run --rm '${{ steps.build.outputs.imageid }}' php -r 'foreach (get_loaded_extensions() as $ext) { printf("%-20s %s\n", $ext, phpversion($ext) ?: "(bundled/no version)"); }'
+                    docker run --rm '${{ steps.build.outputs.imageid }}' php -r 'foreach (get_loaded_extensions() as $ext) { printf("%-20s %s\n", $ext, phpversion($ext) ?: "(bundled/no version)"); }' | sort
             -
                 uses: docker/login-action@v3.6.0
                 with:
