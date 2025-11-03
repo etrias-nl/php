@@ -16,10 +16,6 @@ RUN --mount=type=cache,target=/var/cache/apt \
 COPY --from=composer /composer /usr/bin/composer
 COPY --from=php_ext_installer /usr/bin/install-php-extensions /usr/bin/
 
-# renovate: datasource=github-releases depName=ext-apcu packageName=krakjoe/apcu
-ENV EXT_APCU_VERSION=5.1.27
-RUN install-php-extensions apcu-${EXT_APCU_VERSION}
-
 RUN install-php-extensions bcmath
 RUN install-php-extensions blackfire
 RUN install-php-extensions calendar
@@ -29,24 +25,25 @@ RUN install-php-extensions gd
 RUN install-php-extensions gmagick
 RUN install-php-extensions imap
 RUN install-php-extensions intl
-RUN IPE_NEWRELIC_DAEMON=0 IPE_NEWRELIC_KEEPLOG=0 \
-    install-php-extensions newrelic
+RUN IPE_NEWRELIC_DAEMON=0 IPE_NEWRELIC_KEEPLOG=0 install-php-extensions newrelic
 RUN install-php-extensions opcache
 RUN install-php-extensions pcntl
 RUN install-php-extensions pdo_mysql
+RUN install-php-extensions soap
+RUN install-php-extensions sockets
+RUN install-php-extensions xsl
+
+# renovate: datasource=github-releases depName=ext-apcu packageName=krakjoe/apcu
+ENV EXT_APCU_VERSION=5.1.27
+RUN install-php-extensions apcu-${EXT_APCU_VERSION}
 
 # renovate: datasource=github-releases depName=ext-redis packageName=phpredis/phpredis
 ENV EXT_REDIS_VERSION=6.2.0
 RUN install-php-extensions redis-${EXT_REDIS_VERSION}
 
-RUN install-php-extensions soap
-RUN install-php-extensions sockets
-
 # renovate: datasource=github-tags depName=ext-uuid packageName=php/pecl-networking-uuid
 ENV EXT_UUID_VERSION=1.3.0
 RUN install-php-extensions uuid-${EXT_UUID_VERSION}
-
-RUN install-php-extensions xsl
 
 # renovate: datasource=github-tags depName=ext-zip packageName=pierrejoye/php_zip
 ENV EXT_ZIP_VERSION=1.22.3
