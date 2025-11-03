@@ -17,15 +17,12 @@ COPY --from=composer /composer /usr/bin/composer
 COPY --from=php_ext_installer /usr/bin/install-php-extensions /usr/bin/
 
 RUN install-php-extensions bcmath
-RUN install-php-extensions blackfire
 RUN install-php-extensions calendar
 RUN install-php-extensions exif
 RUN install-php-extensions ftp
 RUN install-php-extensions gd
-RUN install-php-extensions gmagick
 RUN install-php-extensions imap
 RUN install-php-extensions intl
-RUN IPE_NEWRELIC_DAEMON=0 IPE_NEWRELIC_KEEPLOG=0 install-php-extensions newrelic
 RUN install-php-extensions opcache
 RUN install-php-extensions pcntl
 RUN install-php-extensions pdo_mysql
@@ -33,9 +30,20 @@ RUN install-php-extensions soap
 RUN install-php-extensions sockets
 RUN install-php-extensions xsl
 
+# https://pecl.php.net/package/gmagick
+RUN install-php-extensions gmagick
+
 # renovate: datasource=github-releases depName=ext-apcu packageName=krakjoe/apcu
 ENV EXT_APCU_VERSION=5.1.27
 RUN install-php-extensions apcu-${EXT_APCU_VERSION}
+
+# renovate: datasource=deb depName=ext-blackfire packageName=blackfire-php registryUrl=https://packages.blackfire.io/debian
+ENV EXT_BLACKFIRE_VERSION=1.92.48
+RUN install-php-extensions blackfire-${EXT_BLACKFIRE_VERSION}
+
+# renovate: datasource=github-releases depName=ext-newrelic packageName=newrelic/newrelic-php-agent
+ENV EXT_NEWRELIC_VERSION=12.1.0.26
+RUN IPE_NEWRELIC_DAEMON=0 IPE_NEWRELIC_KEEPLOG=0 install-php-extensions newrelic-${EXT_NEWRELIC_VERSION}
 
 # renovate: datasource=github-releases depName=ext-redis packageName=phpredis/phpredis
 ENV EXT_REDIS_VERSION=6.2.0
