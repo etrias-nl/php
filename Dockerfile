@@ -21,7 +21,6 @@ RUN install-php-extensions calendar
 RUN install-php-extensions exif
 RUN install-php-extensions ftp
 RUN install-php-extensions gd
-RUN install-php-extensions gmagick
 RUN install-php-extensions imap
 RUN install-php-extensions intl
 RUN install-php-extensions opcache
@@ -30,6 +29,9 @@ RUN install-php-extensions pdo_mysql
 RUN install-php-extensions soap
 RUN install-php-extensions sockets
 RUN install-php-extensions xsl
+
+# https://pecl.php.net/package/gmagick
+RUN install-php-extensions gmagick
 
 # renovate: datasource=github-releases depName=ext-apcu packageName=krakjoe/apcu
 ENV EXT_APCU_VERSION=5.1.27
