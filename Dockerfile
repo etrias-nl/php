@@ -37,7 +37,7 @@ RUN install-php-extensions gmagick
 ENV EXT_APCU_VERSION=5.1.27
 RUN install-php-extensions apcu-${EXT_APCU_VERSION}
 
-# renovate: datasource=deb depName=ext-blackfire packageName=blackfire-php registryUrl=https://packages.blackfire.io/debian
+# renovate: datasource=deb depName=ext-blackfire packageName=blackfire-php registryUrl=https://packages.blackfire.io/debian?dist=any&components=main
 ENV EXT_BLACKFIRE_VERSION=1.92.48
 RUN install-php-extensions blackfire-${EXT_BLACKFIRE_VERSION}
 
