@@ -71,7 +71,6 @@ jobs:
                     flavor: |
                         latest=false
                         suffix=-${{ matrix.runner }}
-                if: github.ref_type == 'tag'
             -
                 uses: docker/build-push-action@v6.18.0
                 env:
