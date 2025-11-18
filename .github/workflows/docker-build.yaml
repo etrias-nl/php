@@ -22,7 +22,7 @@ jobs:
         runs-on: ${{ matrix.runner }}
         steps:
             -
-                uses: actions/checkout@v5.0.0
+                uses: actions/checkout@v5.0.1
             -
                 uses: docker/setup-buildx-action@v3.11.1
             -
@@ -91,7 +91,7 @@ jobs:
         if: github.ref_type == 'tag'
         steps:
             -
-                uses: actions/checkout@v5.0.0
+                uses: actions/checkout@v5.0.1
             -
                 uses: docker/setup-buildx-action@v3.11.1
             -
