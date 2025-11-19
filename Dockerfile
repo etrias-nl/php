@@ -62,7 +62,7 @@ RUN mkdir -p /tmp/blackfire && curl -L "https://blackfire.io/api/v1/releases/cli
 RUN echo 'blackfire.apm_enabled = 0' >> /usr/local/etc/php/conf.d/docker-php-ext-blackfire.ini
 RUN echo 'newrelic.enabled = 0' >> /usr/local/etc/php/conf.d/newrelic.ini
 RUN echo 'newrelic.daemon.dont_launch = 3' >> /usr/local/etc/php/conf.d/newrelic.ini
-RUN echo 'newrelic.loglevel = "warning"' >> /usr/local/etc/php/conf.d/newrelic.ini
+RUN echo 'newrelic.loglevel = "error"' >> /usr/local/etc/php/conf.d/newrelic.ini
 RUN sed -i -E 's~/var/log/newrelic/.++\.log~/dev/stderr~' /usr/local/etc/php/conf.d/newrelic.ini
 
 WORKDIR /app
