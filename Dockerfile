@@ -41,7 +41,7 @@ RUN install-php-extensions apcu-${EXT_APCU_VERSION}
 ENV EXT_BLACKFIRE_VERSION=1.92.50
 RUN install-php-extensions blackfire-${EXT_BLACKFIRE_VERSION}
 
-# renovate: datasource=github-releases depName=ext-newrelic packageName=newrelic/newrelic-php-agent
+# renovate: datasource=github-releases depName=ext-newrelic packageName=newrelic/newrelic-php-agent versioning=loose
 ENV EXT_NEWRELIC_VERSION=12.1.0.26
 RUN IPE_NEWRELIC_DAEMON=0 IPE_NEWRELIC_KEEPLOG=0 install-php-extensions newrelic-${EXT_NEWRELIC_VERSION}
 
