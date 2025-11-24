@@ -1,7 +1,7 @@
 FROM mlocati/php-extension-installer:2.9.18 AS php_ext_installer
 FROM composer/composer:2.9.2-bin AS composer
 
-FROM php:8.3.27-fpm-bookworm
+FROM php:8.3.28-fpm-bookworm
 
 RUN ln -sr /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini
 
