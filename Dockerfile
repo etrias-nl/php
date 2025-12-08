@@ -34,7 +34,7 @@ RUN install-php-extensions xsl
 RUN install-php-extensions gmagick
 
 # renovate: datasource=github-releases depName=ext-apcu packageName=krakjoe/apcu
-ENV EXT_APCU_VERSION=5.1.27
+ENV EXT_APCU_VERSION=5.1.28
 RUN install-php-extensions apcu-${EXT_APCU_VERSION}
 
 # renovate: datasource=deb depName=ext-blackfire packageName=blackfire-php registryUrl=https://packages.blackfire.io/debian?suite=any&components=main&binaryArch=amd64
