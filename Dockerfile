@@ -38,7 +38,7 @@ ENV EXT_APCU_VERSION=5.1.28
 RUN install-php-extensions apcu-${EXT_APCU_VERSION}
 
 # renovate: datasource=deb depName=ext-blackfire packageName=blackfire-php registryUrl=https://packages.blackfire.io/debian?suite=any&components=main&binaryArch=amd64
-ENV EXT_BLACKFIRE_VERSION=1.92.57
+ENV EXT_BLACKFIRE_VERSION=1.92.58
 RUN install-php-extensions blackfire-${EXT_BLACKFIRE_VERSION}
 
 # renovate: datasource=github-releases depName=ext-newrelic packageName=newrelic/newrelic-php-agent versioning=loose
