@@ -31,9 +31,6 @@ RUN install-php-extensions soap
 RUN install-php-extensions sockets
 RUN install-php-extensions xsl
 
-# https://pecl.php.net/package/gmagick
-RUN install-php-extensions gmagick
-
 # renovate: datasource=github-releases depName=ext-apcu packageName=krakjoe/apcu
 ENV EXT_APCU_VERSION=5.1.28
 RUN install-php-extensions apcu-${EXT_APCU_VERSION}
