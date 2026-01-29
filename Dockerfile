@@ -21,7 +21,6 @@ RUN install-php-extensions calendar
 RUN install-php-extensions exif
 RUN install-php-extensions ftp
 RUN install-php-extensions gd
-RUN install-php-extensions imagick
 RUN install-php-extensions imap
 RUN install-php-extensions intl
 RUN install-php-extensions opcache
@@ -38,6 +37,10 @@ RUN install-php-extensions apcu-${EXT_APCU_VERSION}
 # renovate: datasource=deb depName=ext-blackfire packageName=blackfire-php registryUrl=https://packages.blackfire.io/debian?suite=any&components=main&binaryArch=amd64
 ENV EXT_BLACKFIRE_VERSION=1.92.60
 RUN install-php-extensions blackfire-${EXT_BLACKFIRE_VERSION}
+
+# renovate: datasource=github-releases depName=ext-imagick packageName=Imagick/imagick
+ENV EXT_IMAGICK_VERSION=3.8.1
+RUN install-php-extensions imagick-${EXT_IMAGICK_VERSION}
 
 # renovate: datasource=github-releases depName=ext-newrelic packageName=newrelic/newrelic-php-agent versioning=loose
 ENV EXT_NEWRELIC_VERSION=12.3.0.28
