@@ -46,7 +46,7 @@ ENV EXT_NEWRELIC_VERSION=12.4.0.29
 RUN IPE_NEWRELIC_DAEMON=0 IPE_NEWRELIC_KEEPLOG=0 install-php-extensions newrelic-${EXT_NEWRELIC_VERSION}
 
 # renovate: datasource=github-releases depName=ext-redis packageName=phpredis/phpredis
-ENV EXT_REDIS_VERSION=6.2.0
+ENV EXT_REDIS_VERSION=6.3.0
 RUN install-php-extensions redis-${EXT_REDIS_VERSION}
 
 # renovate: datasource=github-tags depName=ext-uuid packageName=php/pecl-networking-uuid
