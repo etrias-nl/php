@@ -41,6 +41,7 @@ RUN install-php-extensions blackfire-${EXT_BLACKFIRE_VERSION}
 # renovate: datasource=github-releases depName=ext-imagick packageName=Imagick/imagick
 ENV EXT_IMAGICK_VERSION=3.8.1
 RUN install-php-extensions imagick-${EXT_IMAGICK_VERSION}
+RUN sed -i '/<policy domain="coder" rights="none" pattern="\(PS\|PS2\|PS3\|EPS\|PDF\|XPS\)" \/>/d' /etc/ImageMagick-6/policy.xml
 
 # renovate: datasource=github-releases depName=ext-newrelic packageName=newrelic/newrelic-php-agent versioning=loose
 ENV EXT_NEWRELIC_VERSION=12.4.0.29
