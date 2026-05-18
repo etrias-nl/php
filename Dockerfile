@@ -1,5 +1,5 @@
 FROM mlocati/php-extension-installer:2.11.1 AS php_ext_installer
-FROM composer/composer:2.9.7-bin AS composer
+FROM composer/composer:2.9.8-bin AS composer
 
 FROM php:8.4.21-fpm-bookworm
 
